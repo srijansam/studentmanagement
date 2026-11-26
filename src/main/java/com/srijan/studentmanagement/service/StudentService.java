@@ -34,4 +34,23 @@ public class StudentService {
     public void deleteStudent(int id) {
         studentRepository.deleteById(id);
     }
+    
+    //Update student
+    public Student updateStudent(int id, Student updatedStudent) {
+    	Optional<Student> optionalStudent = studentRepository.findById(id);
+    	
+    	if(optionalStudent.isPresent()) {
+    		Student existingStudent = optionalStudent.get();
+    		existingStudent.setName(updatedStudent.getName());
+    		existingStudent.setAge(updatedStudent.getAge());
+    		existingStudent.setEmail(updatedStudent.getEmail());
+    		
+    		return studentRepository.save(existingStudent);
+    	}
+    	
+    	return null;
+    	
+    }
+    
+    
 }
